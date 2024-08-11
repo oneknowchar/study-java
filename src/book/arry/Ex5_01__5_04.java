@@ -1,6 +1,6 @@
-package book;
+package book.arry;
 
-public class Array {
+public class Ex5_01__5_04 {
 	public static void main(String[] args) {
 		int [] aaa = {1,2,3,4};
 		int [] bbb= {1,2,3,4,};
@@ -43,12 +43,12 @@ public class Array {
 			}
 		}
 		
-		average = (float)total / totalCnt;
-		
+		average = (float)total / totalCnt;	
+		//totalCnt를 구하는 또 다른 방법은 가로 세로가 일정한 길이... 가로 * 세로 = 20.
 		System.out.println("total="+total); // 결과 : total=325
 		System.out.println("average="+average); // 결과 : average=16.25
 		System.out.println("-------------------------------------------------------------");
-		
-		
 	}
+	
+	
 }
