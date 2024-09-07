@@ -1,4 +1,4 @@
-package book.constructor;
+package book.chapter_06_constructor;
 
 public class Ex6_09 {
 	public static void main(String[] args) {

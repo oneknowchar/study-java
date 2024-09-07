@@ -1,4 +1,4 @@
-package book.constructor;
+package book.chapter_06_constructor;
 
 import java.util.Arrays;
 

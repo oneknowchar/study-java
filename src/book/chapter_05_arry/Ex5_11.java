@@ -1,4 +1,4 @@
-package book.arry;
+package book.chapter_05_arry;
 
 public class Ex5_11 {
 	public static void main(String[] args) {

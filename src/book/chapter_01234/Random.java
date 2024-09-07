@@ -1,4 +1,4 @@
-package book;
+package book.chapter_01234;
 
 public class Random {
 	public static void main(String[] args) {
