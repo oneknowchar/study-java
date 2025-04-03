@@ -10,4 +10,14 @@ public abstract class MyLogger {
         String time = LocalTime.now().format(FORMATTER);
         System.out.printf("%s [%9s] %s\n", time, Thread.currentThread().getName(), obj.toString());
     }
+
+    public static void printCommandKey() {
+        log("===================================");
+        log("/join {username}  - sign in");
+        log("/message {message}  - to send message");
+        log("/change {username}  - chage username");
+        log("/users  - show users");
+        log("/exit  - to exit");
+        log("===================================");
+    }
 }

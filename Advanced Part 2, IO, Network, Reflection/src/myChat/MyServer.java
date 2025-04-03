@@ -2,42 +2,31 @@ package myChat;
 
 import static util.MyLogger.log;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyServer {
-    private static final int PORT = 5713;
+    private static final int PORT = 12345;
+    public static List<MyClient> SIGNED_USERS = new ArrayList<>();
 
     public static void main(String[] args) {
-        try (
-                ServerSocket serverSocket = new ServerSocket(PORT);
-                Scanner sc = new Scanner(System.in);
-            ) {
-            log("== SERVER ==");
-            Socket socket = serverSocket.accept();
-            log("== client connected! ==");
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
 
-            DataInputStream input = new DataInputStream(socket.getInputStream());
-            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+            log("== [START] SERVER ==");
 
-            while(true) {
-                //메시지 받기
-                String receive = input.readUTF();
-                log(receive);
+            while (true) {
+                Socket socket = serverSocket.accept();
 
-                //메시지 보내기
-                String nickName = "server";
-                System.out.print(nickName + ": ");
-                String toSend = nickName + ": " + sc.nextLine();
-                output.writeUTF(toSend);
+                MySession session = new MySession(socket);
+                Thread thread = new Thread(session);
+                thread.start();
             }
         } catch (IOException e) {
-            log("== server error!! ==");
-            log(e);
+            e.printStackTrace();
         }
     }
 }
