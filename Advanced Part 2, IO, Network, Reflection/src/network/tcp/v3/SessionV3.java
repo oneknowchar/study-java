@@ -1,15 +1,15 @@
 package network.tcp.v3;
 
-import static util.MyLogger.log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import static util.MyLogger.log;
+
 public class SessionV3 implements Runnable {
 
-    public final Socket socket;
+    private final Socket socket;
 
     public SessionV3(Socket socket) {
         this.socket = socket;
@@ -21,27 +21,28 @@ public class SessionV3 implements Runnable {
             DataInputStream input = new DataInputStream(socket.getInputStream());
             DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
-            // 클라이언트 에게 문자 받기
             while (true) {
+                // 클라이언트로부터 문자 받기
                 String received = input.readUTF();
-                log("server <-  client: " + received);
+                log("client -> server: " + received);
 
-                if (received.equals("exit")) break;
+                if (received.equals("exit")) {
+                    break;
+                }
 
-                String toSend = received + " World";
-
-                // 클라이언트 에게 문자 보내기
-                log("server -> client : " + toSend);
+                // 클라이언트에게 문자 보내기
+                String toSend = received + " World!";
                 output.writeUTF(toSend);
+                log("client <- server: " + toSend);
             }
 
-            log("connection close");
-
+            // 자원 정리
+            log("연결 종료: " + socket);
             input.close();
             output.close();
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }

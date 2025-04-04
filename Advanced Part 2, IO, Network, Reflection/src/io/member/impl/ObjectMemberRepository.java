@@ -34,10 +34,4 @@ public class ObjectMemberRepository implements MemberRepository {
             throw new RuntimeException(e);
         }
     }
-
-	@Override
-	public boolean removeMember(String id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

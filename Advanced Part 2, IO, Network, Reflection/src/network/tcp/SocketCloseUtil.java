@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import static util.MyLogger.log;;
+import static util.MyLogger.log;
 
 public class SocketCloseUtil {
 
@@ -15,31 +15,31 @@ public class SocketCloseUtil {
         close(socket);
     }
 
-    public static void close(OutputStream output) {
-        if(output != null) {
+    public static void close(InputStream input) {
+        if (input != null) {
             try {
-                output.close();
-            }catch (IOException e) {
+                input.close();
+            } catch (IOException e) {
                 log(e.getMessage());
             }
         }
     }
 
-    public static void close(InputStream input) {
-        if(input != null) {
+    public static void close(OutputStream output) {
+        if (output != null) {
             try {
-                input.close();
-            }catch (IOException e) {
+                output.close();
+            } catch (IOException e) {
                 log(e.getMessage());
             }
         }
     }
 
     public static void close(Socket socket) {
-        if(socket != null) {
+        if (socket != null) {
             try {
                 socket.close();
-            }catch (IOException e) {
+            } catch (IOException e) {
                 log(e.getMessage());
             }
         }

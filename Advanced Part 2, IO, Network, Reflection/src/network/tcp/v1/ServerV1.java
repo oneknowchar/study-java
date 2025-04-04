@@ -1,41 +1,41 @@
 package network.tcp.v1;
 
-import static util.MyLogger.log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import static util.MyLogger.log;
+
 public class ServerV1 {
-    private static final int PORT = 1234;
+
+    private static final int PORT = 12345;
 
     public static void main(String[] args) throws IOException {
-        log("SERVER START");
+        log("서버 시작");
         ServerSocket serverSocket = new ServerSocket(PORT);
-        log("SERVER SOCKET START -  listening port :  " + PORT);
+        log("서버 소켓 시작 - 리스닝 포트: " + PORT);
 
-        Socket accept = serverSocket.accept();
+        Socket socket = serverSocket.accept();
+        log("소켓 연결: " + socket);
+        DataInputStream input = new DataInputStream(socket.getInputStream());
+        DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
-        DataInputStream input = new DataInputStream(accept.getInputStream());
-        DataOutputStream output = new DataOutputStream(accept.getOutputStream());
-
-        // 클라이언트 에게 문자 받기
+        // 클라이언트로부터 문자 받기
         String received = input.readUTF();
-        log("server <-  client: " + received);
+        log("client -> server: " + received);
 
-        String toSend = received + " World";
-
-        // 클라이언트 에게 문자 보내기
-        log("server -> client : " + toSend);
+        // 클라이언트에게 문자 보내기
+        String toSend = received + " World!";
         output.writeUTF(toSend);
+        log("client <- server: " + toSend);
 
-        log("connection close");
-
+        // 자원 정리
+        log("연결 종료: " + socket);
         input.close();
         output.close();
-        accept.close();
+        socket.close();
         serverSocket.close();
     }
 }

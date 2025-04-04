@@ -1,6 +1,2 @@
 eclipse.preferences.version=1
-encoding//src/network/tcp/v1/ClientV1.java=UTF-8
-encoding//src/network/tcp/v2/ClientV2.java=UTF-8
-encoding//src/network/tcp/v3/ClientV3.java=UTF-8
-encoding//src/network/tcp/v4/ClientV4.java=UTF-8
 encoding/<project>=UTF-8
